@@ -22,6 +22,11 @@ pipeline {
   steps {
     dir('terraform') {
       sh '''
+        echo "TENANCY: $TF_VAR_tenancy_ocid"
+        echo "USER: $TF_VAR_user_ocid"
+        echo "FINGERPRINT: $TF_VAR_fingerprint"
+        echo "REGION: $TF_VAR_region"
+
         echo "🧪 DEBUGGING PRIVATE KEY"
         echo "Key path = $TF_VAR_private_key_path"
         head -n 2 $TF_VAR_private_key_path
