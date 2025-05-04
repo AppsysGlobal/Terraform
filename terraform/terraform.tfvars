@@ -1,7 +1,6 @@
 tenancy_ocid         = "ocid1.tenancy.oc1..aaaaaaaasiigfpcj7o4xn6o5r725u5zofb5tfmfb57vzqqsirlnkhg6lpiva"
 user_ocid            = "ocid1.user.oc1..aaaaaaaakmvqxdblzf2z7xnmau7guxlcbs6iuloyy3nq2ob2x2aa5i7gn6tq"
 fingerprint          = "d4:1d:8c:d9:8f:00:b2:04:e9:80:09:98:ec:f8:42:7e"
-private_key_path     = "/home/ubuntu/ocidevopsvmkey"
 region               = "us-ashburn-1"
 compartment_ocid     = "ocid1.compartment.oc1..aaaaaaaasiigfpcj7o4xn6o5r725u5zofb5tfmfb57vzqqsirlnkhg6lpiva"
 subnet_id            = "ocid1.subnet.oc1.iad.aaaaaaaaxeyq7yugxchxhh74vfl6tmfojvyuqpdy567svjpw3xh3ex6d2mwa"
