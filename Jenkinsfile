@@ -17,16 +17,23 @@ pipeline {
       }
     }
 
-    stage('Terraform Init & Apply') {
-      steps {
-        dir('terraform') {
-          sh '''
-            terraform init
-            terraform apply -auto-approve
-          '''
-        }
-      }
+   stage('Terraform Init & Apply') {
+  steps {
+    dir('terraform') {
+      sh '''
+        echo "🧪 DEBUGGING PRIVATE KEY"
+        echo "Key path = $TF_VAR_private_key_path"
+        head -n 2 $TF_VAR_private_key_path
+
+        echo "🔧 Running terraform init"
+        terraform init
+
+        echo "🚀 Running terraform apply"
+        terraform apply -auto-approve
+      '''
     }
+  }
+}
 
     stage('Generate Inventory File') {
       steps {
