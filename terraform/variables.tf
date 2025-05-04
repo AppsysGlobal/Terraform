@@ -1,8 +1,40 @@
-variable "tenancy_ocid" {}
-variable "user_ocid" {}
-variable "fingerprint" {}
-variable "private_key_path" {}
-variable "region" {}
-variable "compartment_ocid" {}
-variable "subnet_id" {}
-variable "ssh_public_key_path" {}
+variable "tenancy_ocid" {
+  description = "OCI Tenancy OCID"
+  type        = string
+}
+
+variable "user_ocid" {
+  description = "OCI User OCID"
+  type        = string
+}
+
+variable "fingerprint" {
+  description = "OCI API Key Fingerprint"
+  type        = string
+}
+
+variable "private_key_path" {
+  description = "Path to the OCI API private key"
+  type        = string
+}
+
+variable "region" {
+  description = "OCI region, e.g., us-ashburn-1"
+  type        = string
+}
+
+variable "compartment_ocid" {
+  description = "OCI Compartment OCID"
+  type        = string
+}
+
+variable "subnet_id" {
+  description = "OCI Subnet OCID"
+  type        = string
+}
+
+variable "ssh_public_key_path" {
+  description = "Path to SSH public key for instance access"
+  type        = string
+}
+
