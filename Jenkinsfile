@@ -54,7 +54,7 @@ ${publicIp} ansible_user=ubuntu ansible_ssh_private_key_file=/home/ubuntu/ocidev
 
     stage('Run Ansible Playbook') {
       steps {
-        sh 'ansible-playbook -i ansible/inventory.ini ansible/apache.yml'
+        sh 'ansible-playbook -i Ansible/inventory.ini Ansible/apache.yml'
       }
     }
   }
