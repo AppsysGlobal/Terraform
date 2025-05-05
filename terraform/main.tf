@@ -62,4 +62,7 @@ resource "oci_core_instance" "vm_instance" {
     source_type = "image"
     source_id   = data.oci_core_images.ubuntu_image.images[0].id
   }
+output "vm_public_ip" {
+  value = oci_core_instance.vm_instance.public_ip
+}
 }
