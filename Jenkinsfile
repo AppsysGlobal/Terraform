@@ -41,7 +41,16 @@ pipeline {
     }
   }
 }
+stage('Run Ansible Playbook') {
+  steps {
+    echo '📁 Listing files in the workspace:'
+    sh 'ls -R'
 
+    echo '📁 Listing contents of ansible folder:'
+    sh 'ls -l ansible'
+
+    echo '📄 Showing contents of inventory.ini:'
+    sh 'cat ansible/inventory.ini'
     stage('Generate Inventory File') {
       steps {
         writeFile file: 'ansible/inventory.ini', text: """[oci_vm]
