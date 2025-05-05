@@ -37,7 +37,6 @@ pipeline {
             def publicIp = sh(script: "terraform output -raw vm_public_ip", returnStdout: true).trim()
             echo "✅ Extracted Public IP: ${publicIp}"
 
-            // Write inventory.ini dynamically
             writeFile file: 'ansible/inventory.ini', text: """[oci_vm]
 ${publicIp} ansible_user=ubuntu ansible_ssh_private_key_file=/home/ubuntu/ocidevopsvmkey
 """
@@ -54,7 +53,7 @@ ${publicIp} ansible_user=ubuntu ansible_ssh_private_key_file=/home/ubuntu/ocidev
 
     stage('Run Ansible Playbook') {
       steps {
-        sh 'ansible-playbook -i Ansible/inventory.ini Ansible/apache.yml'
+        sh 'ansible-playbook -i ansible/inventory.ini ansible/apache.yml'
       }
     }
   }
@@ -63,15 +62,18 @@ ${publicIp} ansible_user=ubuntu ansible_ssh_private_key_file=/home/ubuntu/ocidev
     success {
       echo "✅ Terraform provisioned VM and Ansible installed Apache successfully"
     }
+
     failure {
       echo "❌ Something went wrong. Check the logs."
-      stage('Terraform Destroy') {
-  steps {
-    dir('terraform') {
-      sh '''
-        echo "☠️  Destroying all Terraform-managed infrastructure"
-        terraform destroy -auto-approve
-      '''
+      // Destroy infra on failure
+      script {
+        dir('terraform') {
+          sh '''
+            echo "☠️  Destroying all Terraform-managed infrastructure"
+            terraform destroy -auto-approve
+          '''
+        }
+      }
     }
   }
 }
