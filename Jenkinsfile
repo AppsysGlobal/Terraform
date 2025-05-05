@@ -65,6 +65,13 @@ ${publicIp} ansible_user=ubuntu ansible_ssh_private_key_file=/home/ubuntu/ocidev
     }
     failure {
       echo "❌ Something went wrong. Check the logs."
+      stage('Terraform Destroy') {
+  steps {
+    dir('terraform') {
+      sh '''
+        echo "☠️  Destroying all Terraform-managed infrastructure"
+        terraform destroy -auto-approve
+      '''
     }
   }
 }
