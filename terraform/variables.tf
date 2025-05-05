@@ -38,6 +38,11 @@ variable "ssh_public_key_path" {
   type        = string
   default = "keys/id_rsa.pub"
 }
+variable "create_vm" {
+  description = "Toggle to create or destroy the VM"
+  type        = bool
+  default     = true
+}
 
 
 
