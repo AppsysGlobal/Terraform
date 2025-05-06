@@ -28,9 +28,8 @@ pipeline {
       steps {
         dir('terraform') {
           sh '''
-            terraform import oci_core_instance.Optimus ocid1.instance.oc1.iad.anuwcljtggm52bqclaqjgzrxtgbganiiijfpdhjqbhowywj4vpyjcfv6bvxa
-            terraform import oci_core_virtual_network.existing_vcn ocid1.vcn.oc1.iad.amaaaaaaggm52bqau6nh5vdtsobv57ucuqpqo4wnsyy5tv6w3aotybggerca
-            terraform import oci_objectstorage_bucket.existing_bucket idyhabl91i8j/Doc-understanding-storage
+          
+          terraform import oci_objectstorage_bucket.existing_bucket idyhabl91i8j/Doc-understanding-storage
           '''
         }
       }
