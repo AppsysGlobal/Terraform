@@ -19,9 +19,9 @@ data "oci_objectstorage_namespace" "ns" {
 }
 
 resource "oci_objectstorage_bucket" "existing_bucket" {
-  compartment_id = var.compartment_ocid
   name           = "Doc-understanding-storage"
-  namespace      = data.oci_objectstorage_namespace.ns.namespace
+  compartment_id = var.compartment_ocid
+  namespace      = "idyhabl91i8j"
 }
 
 
