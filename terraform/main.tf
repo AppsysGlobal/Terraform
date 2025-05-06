@@ -20,6 +20,9 @@ data "oci_objectstorage_namespace" "ns" {
 
 # Existing Bucket import placeholder
 resource "oci_objectstorage_bucket" "existing_bucket" {
+  name           = "Doc-understanding-storage"
+  compartment_id = var.compartment_ocid
+  namespace      = data.oci_objectstorage_namespace.ns.namespace
   # No fields required; used for importing existing bucket
 }
 
