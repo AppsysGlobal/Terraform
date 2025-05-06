@@ -23,12 +23,6 @@ variable "region" {
   type        = string
 }
 
-
-variable "subnet_id" {
-  description = "OCI Subnet OCID"
-  type        = string
-}
-
 variable "ssh_public_key_path" {
   description = "Path to SSH public key"
   type        = string
