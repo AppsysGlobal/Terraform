@@ -3,4 +3,4 @@ user_ocid        = "ocid1.user.oc1..aaaaaaaakmvqxdblzf2z7xnmau7guxlcbs6iuloyy3nq
 fingerprint      = "58:64:f1:f7:24:a8:0e:85:77:80:a7:3b:8a:87:05:94"
 private_key_path = "/var/lib/jenkins/.oci/oci_api_key_pkcs8.pem"
 region           = "us-ashburn-1"
-
+namespace        = "idyhabl91i8j"
