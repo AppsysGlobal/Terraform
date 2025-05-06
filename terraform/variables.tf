@@ -22,10 +22,7 @@ variable "region" {
   description = "OCI region, e.g., us-ashburn-1"
   type        = string
 }
-variable "namespace" {
-  description = "namespace of the object storage"
-  type        = string
-}
+
 variable "ssh_public_key_path" {
   description = "Path to SSH public key"
   type        = string
