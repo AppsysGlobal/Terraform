@@ -15,28 +15,9 @@ provider "oci" {
   region           = var.region
 }
 
-# Existing VM import placeholder
-resource "oci_core_instance" "Optimus" {
-  # No fields required; used for importing existing instance
-}
-
-# Existing VCN import placeholder
-resource "oci_core_virtual_network" "existing_vcn" {
-  # No fields required; used for importing existing VCN
-}
-
 # Existing Bucket import placeholder
 resource "oci_objectstorage_bucket" "existing_bucket" {
   # No fields required; used for importing existing bucket
-}
-
-# Outputs to confirm import
-output "vm_ocid" {
-  value = oci_core_instance.Optimus.id
-}
-
-output "vcn_ocid" {
-  value = oci_core_virtual_network.existing_vcn.id
 }
 
 output "bucket_name" {
