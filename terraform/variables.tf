@@ -28,6 +28,8 @@ variable "ssh_public_key_path" {
   type        = string
   default = "keys/id_rsa.pub"
 }
-
-
+variable "compartment_ocid" {
+description = "Compartment OCID"
+type        = string
+}
 
