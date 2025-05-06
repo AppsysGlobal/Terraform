@@ -14,10 +14,6 @@ provider "oci" {
   private_key_path = var.private_key_path
   region           = var.region
 } 
-data "oci_objectstorage_namespace" "ns" {
-  compartment_id = var.compartment_ocid
-}
-
 resource "oci_objectstorage_bucket" "existing_bucket" {
   name           = "Doc-understanding-storage"
   compartment_id = var.compartment_ocid
