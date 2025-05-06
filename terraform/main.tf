@@ -16,7 +16,7 @@ provider "oci" {
 }
 
 # Existing VM import placeholder
-resource "oci_core_instance" "optimus" {
+resource "oci_core_instance" "Optimus" {
   # No fields required; used for importing existing instance
 }
 
