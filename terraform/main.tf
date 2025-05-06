@@ -32,7 +32,7 @@ resource "oci_objectstorage_bucket" "existing_bucket" {
 
 # Outputs to confirm import
 output "vm_ocid" {
-  value = oci_core_instance.optimus.id
+  value = oci_core_instance.Optimus.id
 }
 
 output "vcn_ocid" {
