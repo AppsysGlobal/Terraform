@@ -16,15 +16,15 @@ provider "oci" {
 } 
 data "oci_objectstorage_namespace" "ns" {
   compartment_id = var.compartment_ocid
-} 
-
-# Existing Bucket import placeholder
-resource "oci_objectstorage_bucket" "existing_bucket" {
-  name           = "Doc-understanding-storage"
-  compartment_id = var.compartment_ocid
-  namespace      = data.oci_objectstorage_namespace.ns.namespace
-  # No fields required; used for importing existing bucket
 }
+
+resource "oci_objectstorage_bucket" "existing_bucket" {
+  compartment_id = var.compartment_ocid
+  name           = "Doc-understanding-storage"
+  namespace      = data.oci_objectstorage_namespace.ns.namespace
+}
+
+
 
 output "bucket_name" {
   value = oci_objectstorage_bucket.existing_bucket.name
