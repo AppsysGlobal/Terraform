@@ -1,5 +1,4 @@
 tenancy_ocid     = "ocid1.tenancy.oc1..aaaaaaaasiigfpcj7o4xn6o5r725u5zofb5tfmfb57vzqqsirlnkhg6lpiva"
-compartment_ocid = "ocid1.tenancy.oc1..aaaaaaaasiigfpcj7o4xn6o5r725u5zofb5tfmfb57vzqqsirlnkhg6lpiva"
 user_ocid        = "ocid1.user.oc1..aaaaaaaakmvqxdblzf2z7xnmau7guxlcbs6iuloyy3nq2ob2x2aa5i7gn6tq"
 fingerprint      = "58:64:f1:f7:24:a8:0e:85:77:80:a7:3b:8a:87:05:94"
 private_key_path = "/var/lib/jenkins/.oci/oci_api_key_pkcs8.pem"
