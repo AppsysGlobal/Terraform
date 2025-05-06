@@ -10,70 +10,47 @@ pipeline {
   }
 
   stages {
-    stage('Checkout Repository') {
+    stage('Checkout') {
       steps {
         git branch: 'main', credentialsId: 'github-creds', url: 'https://github.com/AppsysGlobal/Terraform.git'
       }
     }
 
-    stage('Terraform Init & Apply') {
+    stage('Terraform Init') {
+      steps {
+        dir('terraform') {
+          sh 'terraform init'
+        }
+      }
+    }
+
+    stage('Terraform Import Existing Resources') {
       steps {
         dir('terraform') {
           sh '''
-            echo "🔧 Running terraform init"
-            terraform init
-
-            echo "🚀 Running terraform apply"
-            terraform apply -auto-approve
+            terraform import oci_core_instance.Optimus ocid1.instance.oc1.iad.anuwcljtggm52bqclaqjgzrxtgbganiiijfpdhjqbhowywj4vpyjcfv6bvxa
+            terraform import oci_core_virtual_network.existing_vcn ocid1.vcn.oc1.iad.amaaaaaaggm52bqau6nh5vdtsobv57ucuqpqo4wnsyy5tv6w3aotybggerca
+            terraform import oci_objectstorage_bucket.existing_bucket idyhabl91i8j/Doc-understanding-storage
           '''
         }
       }
     }
 
-    stage('Extract Public IP & Generate Inventory') {
+    stage('Terraform Plan') {
       steps {
         dir('terraform') {
-          script {
-            def publicIp = sh(script: "terraform output -raw vm_public_ip", returnStdout: true).trim()
-            echo "✅ Extracted Public IP: ${publicIp}"
-
-            writeFile file: 'ansible/inventory.ini', text: """[oci_vm]
-${publicIp} ansible_user=ubuntu ansible_ssh_private_key_file=/home/ubuntu/ocidevopsvmkey
-"""
-          }
+          sh 'terraform plan'
         }
-      }
-    }
-
-    stage('Debug Inventory') {
-      steps {
-        sh 'cat ansible/inventory.ini'
-      }
-    }
-
-    stage('Run Ansible Playbook') {
-      steps {
-        sh 'ansible-playbook -i ansible/inventory.ini ansible/apache.yml'
       }
     }
   }
 
   post {
     success {
-      echo "✅ Terraform provisioned VM and Ansible installed Apache successfully"
+      echo '✅ Imported existing resources successfully!'
     }
-
     failure {
-      echo "❌ Something went wrong. Check the logs."
-      // Destroy infra on failure
-      script {
-        dir('terraform') {
-          sh '''
-            echo "☠️  Destroying all Terraform-managed infrastructure"
-            terraform destroy -auto-approve
-          '''
-        }
-      }
+      echo '❌ Failed to import or plan. Check logs.'
     }
   }
 }
