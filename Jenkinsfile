@@ -17,25 +17,25 @@ stages {
 
     stage('Terraform Init') {
         steps {
-            sh '''
+            sh 
             terraform init
-            '''
+          
         }
     }
 
     stage('Terraform Plan') {
         steps {
-            sh '''
+            sh 
             terraform plan
-            '''
+            
         }
     }
 
     stage('Terraform Apply') {
         steps {
-            sh '''
+            sh 
             terraform apply -auto-approve
-            '''
+           
         }
     }
 }
@@ -46,6 +46,6 @@ post {
         cleanWs()
     }
 }
-```
+
 
 }
