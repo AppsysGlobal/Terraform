@@ -1,55 +1,52 @@
 pipeline {
-  agent any
+agent any
 
-  environment {
-    TF_VAR_tenancy_ocid     = credentials('oci-tenancy-ocid')
-    TF_VAR_user_ocid        = credentials('oci-user-ocid')
-    TF_VAR_fingerprint      = credentials('oci-fingerprint')
-    TF_VAR_region           = credentials('oci-region')
-    TF_VAR_private_key_path = '/var/lib/jenkins/.oci/oci_api_key_pkcs8.pem'
-  }
+```
+environment {
+    TF_VAR_private_key_path = "/home/ubuntu/.oci/oci_api_key_pkcs8.pem"
+    TF_VAR_ssh_public_key_path = "/home/ubuntu/.ssh/id_rsa.pub"
+}
 
-  stages {
+stages {
     stage('Checkout') {
-      steps {
-        git branch: 'main', credentialsId: 'github-creds', url: 'https://github.com/AppsysGlobal/Terraform.git'
-      }
+        steps {
+            script {
+                git url: 'https://github.com/AppsysGlobal/Terraform.git', branch: 'main'
+            }
+        }
     }
 
     stage('Terraform Init') {
-      steps {
-        dir('terraform') {
-          sh 'terraform init'
+        steps {
+            sh '''
+            terraform init
+            '''
         }
-      }
-    }
-
-    stage('Terraform Import Existing Resources') {
-      steps {
-        dir('terraform') {
-          sh '''
-          
-          terraform import oci_objectstorage_bucket.existing_bucket idyhabl91i8j/Doc-understanding-storage
-          '''
-        }
-      }
     }
 
     stage('Terraform Plan') {
-      steps {
-        dir('terraform') {
-          sh 'terraform plan'
+        steps {
+            sh '''
+            terraform plan
+            '''
         }
-      }
     }
-  }
 
-  post {
-    success {
-      echo '✅ Imported existing resources successfully!'
+    stage('Terraform Apply') {
+        steps {
+            sh '''
+            terraform apply -auto-approve
+            '''
+        }
     }
-    failure {
-      echo '❌ Failed to import or plan. Check logs.'
+}
+
+post {
+    always {
+        echo 'Cleaning up workspace...'
+        cleanWs()
     }
-  }
+}
+```
+
 }
