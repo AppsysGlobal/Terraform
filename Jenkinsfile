@@ -1,7 +1,6 @@
 pipeline {
 agent any
 
-```
 environment {
     TF_VAR_private_key_path = "/home/ubuntu/.oci/oci_api_key_pkcs8.pem"
     TF_VAR_ssh_public_key_path = "/home/ubuntu/.ssh/id_rsa.pub"
