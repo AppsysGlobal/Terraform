@@ -1,5 +1,5 @@
-pipeline {
-agent any
+pipeline { agent any
+
 
 environment {
     TF_VAR_private_key_path = "/home/ubuntu/.oci/oci_api_key_pkcs8.pem"
@@ -17,25 +17,25 @@ stages {
 
     stage('Terraform Init') {
         steps {
-            sh 
+            sh '''
             terraform init
-          
+            '''
         }
     }
 
     stage('Terraform Plan') {
         steps {
-            sh 
+            sh '''
             terraform plan
-            
+            '''
         }
     }
 
     stage('Terraform Apply') {
         steps {
-            sh 
+            sh '''
             terraform apply -auto-approve
-           
+            '''
         }
     }
 }
